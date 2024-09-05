@@ -4,11 +4,13 @@ import { cartSliceActions } from '../../store/cart';
 
 const CartItem = (props) => {
   const dispatch = useDispatch();
-  const { itemId, title, quantity, total, price } = props.item;
+  const { itemId, title, quantity, price } = props.item;
   const items = useSelector(state => state.cart)
-
+  console.log({ itemId, title, quantity, price });
+  const total = quantity * price;
   console.log('CARTITEM - items: ', items);
   console.log('CARTITEM - props.item: ', props.item);
+  console.log({ itemId, title, quantity, price });
 
   const handleAddItemToCart = (item) => {
     dispatch(cartSliceActions.addToCart(item));
@@ -33,7 +35,7 @@ const CartItem = (props) => {
         </div>
         <div className={classes.actions}>
           <button onClick={() => handleRemoveItemToCart(itemId)}>-</button>
-          <button onClick={() => handleAddItemToCart({ itemId, title, quantity, total, price })}>+</button>
+          <button onClick={() => handleAddItemToCart({ itemId, title, price })}>+</button>
         </div>
       </div>
     </li>
